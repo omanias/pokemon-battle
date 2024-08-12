@@ -13,12 +13,12 @@ export class BattleService {
     private battleResultRepository: Repository<BattleResult>,
   ) {}
 
-  async battle(pokemon1Id: number, pokemon2Id: number): Promise<BattleResult> {
+  async battle(pokemon1Id: string, pokemon2Id: string): Promise<BattleResult> {
     const pokemon1 = await this.pokemonRepository.findOneBy({
-      id: pokemon1Id.toString(),
+      id: pokemon1Id,
     });
     const pokemon2 = await this.pokemonRepository.findOneBy({
-      id: pokemon2Id.toString(),
+      id: pokemon2Id,
     });
 
     let attacker = pokemon1.speed > pokemon2.speed ? pokemon1 : pokemon2;

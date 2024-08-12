@@ -11,7 +11,6 @@ export class PokemonService {
   ) {}
 
   findAll(): Promise<Pokemon[]> {
-    console.log('hhhh');
     return this.pokemonRepository.find();
   }
 

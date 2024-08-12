@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  Typography,
-  CardMedia,
-  LinearProgress,
-  Box,
-} from "@mui/material";
+import { Card, CardContent, Typography, CardMedia, Box } from "@mui/material";
 
 interface PokemonCardProps {
   name: string;
@@ -15,7 +8,9 @@ interface PokemonCardProps {
   hp: number;
   speed: number;
   imageUrl: string;
+  showDetails?: boolean;
 }
+
 
 const PokemonCard: React.FC<PokemonCardProps> = ({
   name,
@@ -24,55 +19,43 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
   hp,
   speed,
   imageUrl,
-}) => {
-  const maxStatValue = 10;
+  showDetails = false,
+}) => (
+  <Card>
+    <CardMedia component="img" height="140" image={imageUrl} alt={name} />
+    <CardContent>
+      <Typography variant="h6">{name}</Typography>
+      {showDetails && (
+        <Box mt={2}>
+          <DetailBar label="Attack" value={attack} />
+          <DetailBar label="Defense" value={defense} />
+          <DetailBar label="HP" value={hp} />
+          <DetailBar label="Speed" value={speed} />
+        </Box>
+      )}
+    </CardContent>
+  </Card>
+);
 
-  return (
-    <Card sx={{ maxWidth: 100, minWidth: 200 }}>
-      <CardMedia
-        component="img"
-        height="200"
-        image={imageUrl}
-        alt={name}
-        sx={{ objectFit: "cover" }}
-      />
-      <CardContent>
-        <Typography variant="h6">{name}</Typography>
-        <Box mb={1}>
-          <Typography variant="body2">Attack</Typography>
-          <LinearProgress
-            variant="determinate"
-            value={(attack / maxStatValue) * 100}
-            sx={{ height: 8, borderRadius: 5 }}
-          />
-        </Box>
-        <Box mb={1}>
-          <Typography variant="body2">Defense</Typography>
-          <LinearProgress
-            variant="determinate"
-            value={(defense / maxStatValue) * 100}
-            sx={{ height: 8, borderRadius: 5 }}
-          />
-        </Box>
-        <Box mb={1}>
-          <Typography variant="body2">HP</Typography>
-          <LinearProgress
-            variant="determinate"
-            value={(hp / maxStatValue) * 100}
-            sx={{ height: 8, borderRadius: 5 }}
-          />
-        </Box>
-        <Box mb={1}>
-          <Typography variant="body2">Speed</Typography>
-          <LinearProgress
-            variant="determinate"
-            value={(speed / maxStatValue) * 100}
-            sx={{ height: 8, borderRadius: 5 }}
-          />
-        </Box>
-      </CardContent>
-    </Card>
-  );
-};
+interface DetailBarProps {
+  label: string;
+  value: number;
+}
+
+const DetailBar: React.FC<DetailBarProps> = ({ label, value }) => (
+  <Box mt={1}>
+    <Typography variant="body2" gutterBottom>
+      {label}: {value}
+    </Typography>
+    <Box
+      sx={{
+        height: 10,
+        width: `${value}%`,
+        backgroundColor: "#3f51b5",
+        borderRadius: 1,
+      }}
+    />
+  </Box>
+);
 
 export default PokemonCard;

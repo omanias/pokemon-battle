@@ -1,6 +1,7 @@
-import * as cors from 'cors';
+import cors from 'cors';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 import { PokemonService } from './pokemon/pokemon.service';
 import * as fs from 'fs';
 
@@ -16,8 +17,10 @@ async function bootstrap() {
 
   for (const pokemon of data.pokemon) {
     await pokemonService.create(pokemon);
-  }
-  console.log(data); */
+
+    }
+    console.log(data); */
+  app.useGlobalPipes(new ValidationPipe());
   await app.listen(3000);
 }
 bootstrap();

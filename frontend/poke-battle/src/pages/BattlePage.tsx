@@ -3,7 +3,7 @@ import PokemonList from "../components/PokemonList";
 
 const BattlePage: React.FC = () => (
   <div>
-    <h1>Pokémon Battle</h1>
+    <h1>Pókemon Battle</h1>
     <PokemonList />
   </div>
 );
