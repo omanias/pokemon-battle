@@ -11,7 +11,6 @@ interface PokemonCardProps {
   showDetails?: boolean;
 }
 
-
 const PokemonCard: React.FC<PokemonCardProps> = ({
   name,
   attack,
@@ -22,7 +21,12 @@ const PokemonCard: React.FC<PokemonCardProps> = ({
   showDetails = false,
 }) => (
   <Card>
-    <CardMedia component="img" height="140" image={imageUrl} alt={name} />
+    <CardMedia
+      component="img"
+      image={imageUrl}
+      alt={name}
+      sx={{ objectFit: "cover" }}
+    />
     <CardContent>
       <Typography variant="h6">{name}</Typography>
       {showDetails && (

@@ -1,9 +1,12 @@
 import React from "react";
 import PokemonList from "../components/PokemonList";
+import { Box } from "@mui/material";
 
 const BattlePage: React.FC = () => (
   <div>
-    <h1>Pókemon Battle</h1>
+    <Box sx={{ textAlign: "center" }}>
+      <h1>Pókemon Battle</h1>
+    </Box>
     <PokemonList />
   </div>
 );
